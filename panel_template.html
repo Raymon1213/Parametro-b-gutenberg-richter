@@ -18,7 +18,7 @@ h2{margin:.6em 0 .2em;font-size:1.25rem}h3{margin:0 0 6px}p.s{color:var(--mut);m
 .lg{display:flex;gap:12px;flex-wrap:wrap;font-size:.85rem;margin:6px 0}.lg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
 label{font-size:.9rem}input[type=range]{width:100%}table{border-collapse:collapse;width:100%;font-size:.9rem}#tb,#rb{display:block;overflow-x:auto}mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}td,th{padding:6px 8px;border-bottom:1px solid var(--bd);text-align:right}td:first-child,th:first-child{text-align:left}
 .warn{background:#f7e9e4;color:#9a3d3d;padding:8px 12px;border-radius:10px;font-size:.9rem}@media(prefers-color-scheme:dark){.warn{background:#3a2226;color:#f0b3b3}}
-a{color:var(--c0)}
+a{color:var(--c0)}.btn{background:var(--acc);color:#fff;border:0;border-radius:20px;padding:8px 18px;cursor:pointer;font-size:.9rem;margin-top:8px}textarea,input[type=number]{background:var(--card);color:var(--ink);border:1px solid var(--bd);border-radius:8px;padding:8px;font:inherit}textarea{width:100%}input[type=number]{width:80px}label{display:block;margin:6px 0}
 </style><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]]},svg:{fontCache:"global"}};</script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script></head><body>
 <header><h1>¿Cuánto vale b en Chile? MLE vs Bayes Empírico</h1><p>Estimación del parámetro b de Gutenberg–Richter · Grupo 7: Benjamín Iribarren, Ramón Espinoza, Gaspar Albornoz · Estadística Avanzada, PUCV</p></header>
@@ -31,7 +31,7 @@ a{color:var(--c0)}
 <section id="s2"><h2>Ley de Gutenberg–Richter por zona</h2><div class="card"><label>Zona: <select id="zsel"></select></label><div class="chart"><svg id="gr" viewBox="0 0 640 340"></svg></div><p id="grt" class="s"></p></div>
 <div class="card"><h3>MLE: de dónde sale la fórmula</h3><p class="s">Con \(Y=M-(M_c-\Delta m/2)\sim\mathrm{Exp}(\beta)\) y \(\beta=b\ln 10\), maximizar \(\ell(\beta)=n\ln\beta-\beta\sum Y_i\) da \(\hat\beta=n/\sum Y_i\), es decir \[\hat b=\frac{\log_{10}e}{\bar M-(M_c-\Delta m/2)},\qquad SE(\hat b)\approx\frac{\hat b}{\sqrt n}\] con \(\Delta m=0{,}1\) (corrección de Utsu).</p></div></section>
 <section id="s3"><h2>MLE vs Bayes Empírico</h2><div class="card"><div class="lg"><span><i style="background:var(--c0)"></i>MLE (con IC 95 % bootstrap)</span><span><i style="background:var(--c3);border-radius:2px"></i>Bayes Empírico</span></div><div class="chart"><svg id="eb" viewBox="0 0 640 260"></svg></div><table id="tb"></table></div>
-<div class="card"><h3>Probá la contracción</h3><p class="s">Supón que cada zona tuviera sólo <b id="nv">100</b> sismos. Mientras menos datos, mayor es \(\sigma_i\) y más contracción: \[B_i=\frac{\sigma_i^2}{\sigma_i^2+\hat\tau^2},\qquad \hat\theta_i=\hat\mu+(1-B_i)(\hat b_i-\hat\mu)\]</p><input type="range" id="nr" min="20" max="350" value="100"><div class="chart"><svg id="eb2" viewBox="0 0 640 230"></svg></div><p class="s" id="ct"></p></div></section>
+<div class="card"><h3>Prueba la contracción</h3><p class="s">Supón que cada zona tuviera sólo <b id="nv">100</b> sismos. Mientras menos datos, mayor es \(\sigma_i\) y más contracción: \[B_i=\frac{\sigma_i^2}{\sigma_i^2+\hat\tau^2},\qquad \hat\theta_i=\hat\mu+(1-B_i)(\hat b_i-\hat\mu)\]</p><input type="range" id="nr" min="20" max="350" value="100"><div class="chart"><svg id="eb2" viewBox="0 0 640 230"></svg></div><p class="s" id="ct"></p></div></section>
 <section id="s4"><h2>Con pocos datos, la contracción ayuda</h2><div class="card"><p class="s">Submuestras sin reemplazo de cada zona (R = 500); el error se mide contra el b de la muestra completa. Menor que 1 = mejor que MLE.</p><div class="lg"><span><i style="background:var(--c3)"></i>Bayes Empírico / MLE</span><span><i style="background:var(--c1)"></i>James–Stein / MLE</span></div><div class="chart"><svg id="sim" viewBox="0 0 640 300"></svg></div></div></section>
 <section id="s5"><h2>Robustez</h2><div class="card"><h3>Sensibilidad al umbral Mc</h3><label>Mc = <b id="mcv">4,2</b> <input type="range" id="mcr" min="4" max="5" step="0.1" value="4.2"></label><div class="chart"><svg id="mc" viewBox="0 0 640 280"></svg></div><p class="s">La heterogeneidad persiste, pero los valores cambian con Mc.</p></div>
 <div class="card"><h3>Incertidumbre: error estándar analítico vs bloques de años</h3><div class="lg"><span><i style="background:var(--c0)"></i>SE analítico (b/√n)</span><span><i style="background:var(--c3)"></i>SE bootstrap por bloques de años</span></div><div class="chart"><svg id="se" viewBox="0 0 640 250"></svg></div><p class="s" id="set"></p></div>
@@ -39,12 +39,18 @@ a{color:var(--c0)}
 <div class="card"><h3>b a lo largo del tiempo</h3><div class="chart"><svg id="pe" viewBox="0 0 640 280"></svg></div><p class="s">Los cambios pueden deberse a la composición del catálogo, las escalas y las agencias; los períodos tienen tamaños distintos.</p></div>
 <div class="card"><h3>Sismos por año (1960–2025)</h3><div class="chart"><svg id="yc" viewBox="0 0 640 220"></svg></div></div>
 <div class="card"><h3>Alertas y límites</h3><p class="s">Zona Austral: KS D = 0,10 (resto ≈ 0,03): interpretar con cautela. El SE por bloques de años es 1,5 a 5,7 veces el analítico (dependencia temporal). Escalas mixtas, un solo Mc, 5 zonas y 11 % de eventos fuera de Chile.</p></div></section>
-</main>
+<section id="s6"><h2>Laboratorio</h2>
+<div class="card"><h3>Simulador: ¿cuántos sismos necesito?</h3><p class="s">Creamos 300 catálogos artificiales con un <i>b</i> verdadero (Mc = 4,2; magnitudes redondeadas a 0,1) y estimamos <i>b</i> con MLE en cada uno. Mueve los controles y observa cómo se dispersan las estimaciones.</p>
+<label>b verdadero: <b id="sbv">0,9</b><input type="range" id="sb" min="0.4" max="1.4" step="0.05" value="0.9"></label>
+<label>Sismos por catálogo (n): <b id="snv">100</b><input type="range" id="sn" min="20" max="2000" step="10" value="100"></label>
+<div class="chart"><svg id="sh" viewBox="0 0 640 260"></svg></div><p class="s" id="st"></p><button class="btn" id="sr">Simular de nuevo</button></div>
+<div class="card"><h3>Calcula tu propio b</h3><p class="s">Pega magnitudes separadas por espacios, saltos de línea o punto y coma (decimales con punto o coma). Se usan solo las magnitudes ≥ Mc y se necesitan al menos 10.</p>
+<textarea id="ta" rows="4" placeholder="4.3 4.5 4.2 5.1 4.8 ..."></textarea><label>Mc: <input id="mci" type="number" step="0.1" value="4.2"></label><button class="btn" id="cb">Calcular b</button><p id="co"></p></div></section></main>
 <script>
 const D=__DATA__;
 const C=['var(--c0)','var(--c1)','var(--c2)','var(--c3)','var(--c4)'],ZN=D.zn,f=(x,d=3)=>x.toFixed(d).replace('.',',');
 const $=i=>document.getElementById(i),NS='http://www.w3.org/2000/svg';
-const tabs=['Resumen','Mapa','Ley G–R','MLE vs EB','Pocos datos','Robustez'];
+const tabs=['Resumen','Mapa','Ley G–R','MLE vs EB','Pocos datos','Robustez','Laboratorio'];
 tabs.forEach((t,i)=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>go(i);$('nav').appendChild(b)});
 function go(i){document.querySelectorAll('section').forEach((s,j)=>s.classList.toggle('on',j==i));document.querySelectorAll('nav button').forEach((b,j)=>b.classList.toggle('on',j==i));location.hash='t'+i}
 function el(p,t,a,x){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(x!=null)e.textContent=x;p.appendChild(e);return e}
@@ -89,5 +95,18 @@ $('rb').innerHTML='<tr><th>Zona</th><th>b (mag)</th><th>b (MWconv)</th><th>KS D<
 {const s=$('pe'),A=axes(s,640,280,[0,3],[0,1.8],[],[.2,.6,1,1.4,1.8]);['1900–89','1990–2004','2005–15','2016–25'].forEach((t,i)=>el(s,'text',{x:A.X(i),y:270,'text-anchor':'middle'},t));D.per.forEach((r,k)=>line(s,A.X,A.Y,[0,1,2,3],r,C[k]));$('pe').insertAdjacentHTML('afterend','<div class="lg" id="lgp"></div>');lg('lgp',ZN)}
 {const s=$('yc'),A=axes(s,640,220,[1960,2025],[0,3500],[1960,1980,2000,2020],[1000,2000,3000]);D.yc.forEach((v,i)=>el(s,'rect',{x:A.X(1960+i)-2.2,y:A.Y(v),width:4.4,height:A.Y(0)-A.Y(v),fill:C[0]}))}
 $('dl').onclick=e=>{e.preventDefault();const t='zona,n,b_MLE,SE,IC_inf,IC_sup,b_EB\n'+ZN.map((n,i)=>[n,D.Z[i].n,b[i],D.Z[i].se,D.Z[i].lo,D.Z[i].hi,E.th[i].toFixed(4)].join(',')).join('\n');const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(t);a.click()};
+// laboratorio
+function simb(){const bt=+$('sb').value,n=+$('sn').value;$('sbv').textContent=f(bt,2);$('snv').textContent=n;const be=bt*Math.LN10,mc=4.2,r=[];
+ for(let k=0;k<300;k++){let S=0;for(let i=0;i<n;i++)S+=Math.round((mc-.05-Math.log(1-Math.random())/be)*10)/10;r.push(Math.LOG10E/(S/n-(mc-.05)))}
+ r.sort((a,c)=>a-c);const mean=r.reduce((a,c)=>a+c)/300,sd=Math.sqrt(r.reduce((a,c)=>a+(c-mean)**2,0)/299),nb=40,w=1.6/nb,h=Array(nb).fill(0);r.forEach(v=>{const j=Math.floor((v-.2)/w);if(j>=0&&j<nb)h[j]++});
+ const mx=Math.max(...h),s=$('sh'),A=axes(s,640,260,[.2,1.8],[0,mx*1.1],[.4,.6,.8,1,1.2,1.4,1.6],[Math.round(mx/2),mx]);
+ h.forEach((c,j)=>el(s,'rect',{x:A.X(.2+j*w)+1,y:A.Y(c),width:A.X(.2+w)-A.X(.2)-2,height:A.Y(0)-A.Y(c),fill:C[0],opacity:.8}));
+ el(s,'line',{x1:A.X(bt),x2:A.X(bt),y1:A.m.t,y2:A.Y(0),stroke:'var(--c3)','stroke-width':2.5,'stroke-dasharray':'6 4'});
+ $('st').textContent=`b verdadero = ${f(bt,2)} (línea naranja). Con n = ${n}, el 95 % de las estimaciones cae entre ${f(r[7],2)} y ${f(r[292],2)}; promedio ${f(mean,3)} y desviación ${f(sd,3)}. Más sismos, estimaciones más concentradas.`}
+$('sb').oninput=simb;$('sn').oninput=simb;$('sr').onclick=simb;simb();
+$('cb').onclick=()=>{const mc=+$('mci').value,all=$('ta').value.split(/[\s;]+/).map(x=>parseFloat(x.replace(',','.'))).filter(x=>!isNaN(x)),m=all.filter(x=>x>=mc-1e-9),o=$('co');
+ if(m.length<10){o.textContent=`Se necesitan al menos 10 magnitudes ≥ Mc (hay ${m.length}).`;return}
+ const n=m.length,bh=Math.LOG10E/(m.reduce((a,c)=>a+c)/n-(mc-.05)),se=bh/Math.sqrt(n);
+ o.innerHTML=`<b>b̂ = ${f(bh)}</b> (n = ${n}${all.length>n?`, se descartaron ${all.length-n} bajo Mc`:''}) · error estándar ${f(se,4)} · IC 95 % aprox. [${f(bh-1.96*se)}; ${f(bh+1.96*se)}]`};
 go(+(location.hash.slice(2))||0);
 </script></body></html>
