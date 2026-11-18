@@ -4,7 +4,7 @@
 **Grupo 7:** Benjamín Iribarren · Ramón Espinoza · Gaspar Albornoz
 Estadística Avanzada (ICD3152) · Pontificia Universidad Católica de Valparaíso
 
-🔗 **Panel interactivo:** https://TU_USUARIO.github.io/NOMBRE_DEL_REPO/
+🔗 **Panel interactivo:** https://Raymon1213.github.io/Parametro-b-gutenberg-richter/
 
 ## Objetivo
 Estimar el parámetro *b* de la ley de Gutenberg–Richter, `log10 N(M) = a − b·M`, en cinco macrozonas de Chile y evaluar si compartir información entre zonas (Bayes Empírico, James–Stein) mejora la estimación respecto de la máxima verosimilitud.
